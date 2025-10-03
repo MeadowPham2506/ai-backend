@@ -1,37 +1,108 @@
 import Database from "@src/core/database.core";
+import { CreateProductDto, UpdateProductDto } from "../types/dtos";
 
 const prisma = Database.getClient();
 
 export default class ProductRepository {
 
-    async createProduct(data: ProductDocument) {
-        return prisma.product.create({ data });
-    }
-
-    async getProductById(id: number) {
-        return prisma.product.findUnique({ where: { id } });
-    }
-
-    async getProductWithCategoryById(id: number) {
-        return prisma.product.findUnique({
-            where: { id },
-            include: { category: true },
+    static async createProduct(data: CreateProductDto) {
+        return prisma.product.create({ 
+            data: {
+                name: data.name,
+                unit: data.unit,
+                origin: data.origin,
+                note: data.note || null,
+                is_active: data.is_active ?? true
+            }
         });
     }
 
-    async updateProduct(id: number, data: ProductDocument) {
-        return prisma.product.update({ where: { id }, data });
+    static async getProductById(id: number) {
+        return prisma.product.findUnique({ where: { id } });
     }
 
-    async deleteProduct(id: number) {
-        return prisma.product.delete({ where: { id } });
+    static async updateProduct(id: number, data: UpdateProductDto) {
+        return prisma.product.update({ 
+            where: { id }, 
+            data: {
+                ...(data.name && { name: data.name }),
+                ...(data.unit && { unit: data.unit }),
+                ...(data.origin && { origin: data.origin }),
+                ...(data.note !== undefined && { note: data.note }),
+                ...(data.is_active !== undefined && { is_active: data.is_active })
+            }
+        });
     }
 
-    async getAllProducts(page: number = 1, limit: number = 10) {
+    static async deleteProduct(id: number): Promise<boolean> {
+        try {
+            await prisma.product.delete({ where: { id } });
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
+
+    static async getAllProducts(
+        page: number = 1, 
+        limit: number = 10, 
+        search?: string, 
+        is_active?: boolean
+    ) {
         const offset = (page - 1) * limit;
+        
+        const whereClause: any = {};
+        
+        if (search) {
+            whereClause.OR = [
+                { name: { contains: search, mode: 'insensitive' } },
+                { unit: { contains: search, mode: 'insensitive' } },
+                { origin: { contains: search, mode: 'insensitive' } }
+            ];
+        }
+        
+        if (is_active !== undefined) {
+            whereClause.is_active = is_active;
+        }
+
         return prisma.product.findMany({
+            where: whereClause,
             skip: offset,
             take: limit,
+            orderBy: { id: 'desc' }
+        });
+    }
+
+    static async countProducts(search?: string, is_active?: boolean): Promise<number> {
+        console.log(search);
+        const whereClause: any = {};
+        
+        if (search) {
+            whereClause.OR = [
+                { name: { contains: search, mode: 'insensitive' } },
+                { unit: { contains: search, mode: 'insensitive' } },
+                { origin: { contains: search, mode: 'insensitive' } }
+            ];
+        }
+        
+        if (is_active !== undefined) {
+            whereClause.is_active = is_active;
+        }
+
+        return prisma.product.count({
+            where: whereClause
+        });
+    }
+
+    // Private method for internal use (validation, etc.) - not exposed via endpoints
+    static async findByName(name: string) {
+        return prisma.product.findFirst({
+            where: {
+                name: {
+                    equals: name,
+                    mode: 'insensitive'
+                }
+            }
         });
     }
 }

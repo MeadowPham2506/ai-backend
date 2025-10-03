@@ -49,6 +49,7 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "build": "tsc && cp -r src/public dist/public",
     "dev": "nodemon",
-    "start": "tsc && node --max-old-space-size=4096 -r ts-node/register/transpile-only -r tsconfig-paths/register dist/main.js"
+    "start": "tsc && node --max-old-space-size=4096 -r ts-node/register/transpile-only -r tsconfig-paths/register dist/main.js",
+    "seed": "ts-node --transpile-only src/sample/seed.ts"
   }
 }

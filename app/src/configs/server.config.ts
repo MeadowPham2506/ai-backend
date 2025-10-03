@@ -1,3 +1,5 @@
+import { ServerConfig } from '@src/types/common/config.types';
+
 const serverConfig: ServerConfig = {
     env: process.env.NODE_ENV || 'development',
     port: parseInt(process.env.SERVER_PORT || '8080', 10),

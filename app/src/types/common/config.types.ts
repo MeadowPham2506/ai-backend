@@ -1,4 +1,4 @@
-interface PostgresDatabaseConfig {
+export interface PostgresDatabaseConfig {
     host: string;
     port: number;
     username: string;
@@ -6,11 +6,11 @@ interface PostgresDatabaseConfig {
     database: string;
 }
 
-interface DatabaseConfig {
+export interface DatabaseConfig {
     Postgres: PostgresDatabaseConfig;
 }
 
-interface ServerConfig {
+export interface ServerConfig {
     env: string;
     port: number;
     limiter: {

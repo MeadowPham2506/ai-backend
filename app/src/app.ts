@@ -6,12 +6,14 @@ import compression from 'compression';
 import favicon from 'serve-favicon';
 import fs from 'fs';
 import path from 'path';
-import limiter from '@src/middlewares/limiter.middleware';
+import limiterMiddleware from '@src/middlewares/limiter.middleware';
+import authenticationMiddleware from './middlewares/auth.middleware';
 import errorHandler from '@src/middlewares/error.middleware';
+import routers from '@src/routes';
 
 const app = express();
 
-const logDirectory = path.join(__dirname, '../logs');
+const logDirectory = path.join(__dirname, './logs');
 if (!fs.existsSync(logDirectory)) fs.mkdirSync(logDirectory);
 const accessLogStream = fs.createWriteStream(path.join(logDirectory, 'app.log'), { flags: 'a' });
 app.use(morgan('combined', { stream: accessLogStream }));
@@ -23,7 +25,9 @@ app.use(morgan('combined', { stream: accessLogStream }));
 app.use(cors({ origin: '*' }));
 app.use(helmet());
 app.use(compression());
-app.use(limiter);
+app.use(limiterMiddleware);
+app.use(authenticationMiddleware);
+app.use(routers);
 app.use(errorHandler);
 
 export default app;
