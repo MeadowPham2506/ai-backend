@@ -1,0 +1,1103 @@
+openapi: 3.0.3
+info:
+  title: AI Backend API
+  version: 1.0.0
+  description: REST API cho hệ thống quản lý Users, Products và Orders
+  contact:
+    name: ThanhPH
+    email: hoangthanh2k3@gmail.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:8080
+    description: Development server
+  - url: https://api.example.com
+    description: Production server
+
+paths:
+  # Health Check
+  /:
+    get:
+      tags:
+        - Health Check
+      summary: Health check endpoint
+      description: Kiểm tra trạng thái hoạt động của API
+      responses:
+        '200':
+          description: API hoạt động bình thường
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+
+  # User endpoints
+  /api/v1/users:
+    get:
+      tags:
+        - Users
+      summary: Lấy danh sách users
+      description: Lấy danh sách tất cả users với phân trang và tìm kiếm
+      parameters:
+        - name: page
+          in: query
+          description: Số trang (mặc định 1)
+          required: false
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: limit
+          in: query
+          description: Số items trên mỗi trang (mặc định 10)
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 100
+        - name: search
+          in: query
+          description: Tìm kiếm theo tên user
+          required: false
+          schema:
+            type: string
+        - name: sortBy
+          in: query
+          description: Sắp xếp theo trường
+          required: false
+          schema:
+            type: string
+            enum: [name, created_at, updated_at]
+            default: created_at
+        - name: sortOrder
+          in: query
+          description: Thứ tự sắp xếp
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: desc
+      responses:
+        '200':
+          description: Danh sách users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    post:
+      tags:
+        - Users
+      summary: Tạo user mới
+      description: Tạo một user mới trong hệ thống
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '201':
+          description: User được tạo thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/users/{id}:
+    get:
+      tags:
+        - Users
+      summary: Lấy user theo ID
+      description: Lấy thông tin chi tiết của một user
+      parameters:
+        - name: id
+          in: path
+          description: ID của user
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Thông tin user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    put:
+      tags:
+        - Users
+      summary: Cập nhật user
+      description: Cập nhật thông tin user theo ID
+      parameters:
+        - name: id
+          in: path
+          description: ID của user
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: User được cập nhật thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    delete:
+      tags:
+        - Users
+      summary: Xóa user
+      description: Xóa user theo ID
+      parameters:
+        - name: id
+          in: path
+          description: ID của user
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: User được xóa thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Product endpoints
+  /api/v1/products:
+    get:
+      tags:
+        - Products
+      summary: Lấy danh sách products
+      description: Lấy danh sách tất cả products với phân trang và lọc
+      parameters:
+        - name: page
+          in: query
+          description: Số trang (mặc định 1)
+          required: false
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: limit
+          in: query
+          description: Số items trên mỗi trang (mặc định 10)
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 100
+        - name: search
+          in: query
+          description: Tìm kiếm theo tên product
+          required: false
+          schema:
+            type: string
+        - name: is_active
+          in: query
+          description: Lọc theo trạng thái hoạt động
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Danh sách products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    post:
+      tags:
+        - Products
+      summary: Tạo product mới
+      description: Tạo một product mới trong hệ thống
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductRequest'
+      responses:
+        '201':
+          description: Product được tạo thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/products/{id}:
+    get:
+      tags:
+        - Products
+      summary: Lấy product theo ID
+      description: Lấy thông tin chi tiết của một product
+      parameters:
+        - name: id
+          in: path
+          description: ID của product
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Thông tin product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    put:
+      tags:
+        - Products
+      summary: Cập nhật product
+      description: Cập nhật thông tin product theo ID
+      parameters:
+        - name: id
+          in: path
+          description: ID của product
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProductRequest'
+      responses:
+        '200':
+          description: Product được cập nhật thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    delete:
+      tags:
+        - Products
+      summary: Xóa product
+      description: Xóa product theo ID
+      parameters:
+        - name: id
+          in: path
+          description: ID của product
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Product được xóa thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # Order endpoints
+  /api/v1/orders:
+    get:
+      tags:
+        - Orders
+      summary: Lấy danh sách orders
+      description: Lấy danh sách tất cả orders với phân trang và lọc
+      parameters:
+        - name: page
+          in: query
+          description: Số trang (mặc định 1)
+          required: false
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: limit
+          in: query
+          description: Số items trên mỗi trang (mặc định 10)
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 100
+        - name: user_id
+          in: query
+          description: Lọc theo user ID
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - name: product_id
+          in: query
+          description: Lọc theo product ID
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+        - name: sortBy
+          in: query
+          description: Sắp xếp theo trường
+          required: false
+          schema:
+            type: string
+            enum: [quantity, created_at, updated_at]
+            default: created_at
+        - name: sortOrder
+          in: query
+          description: Thứ tự sắp xếp
+          required: false
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: desc
+        - name: dateFrom
+          in: query
+          description: Lọc orders từ ngày (YYYY-MM-DD)
+          required: false
+          schema:
+            type: string
+            format: date
+        - name: dateTo
+          in: query
+          description: Lọc orders đến ngày (YYYY-MM-DD)
+          required: false
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Danh sách orders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    post:
+      tags:
+        - Orders
+      summary: Tạo order mới
+      description: Tạo một order mới trong hệ thống
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '201':
+          description: Order được tạo thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/orders/{id}:
+    get:
+      tags:
+        - Orders
+      summary: Lấy order theo ID
+      description: Lấy thông tin chi tiết của một order
+      parameters:
+        - name: id
+          in: path
+          description: ID của order
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Thông tin order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    put:
+      tags:
+        - Orders
+      summary: Cập nhật order
+      description: Cập nhật thông tin order theo ID
+      parameters:
+        - name: id
+          in: path
+          description: ID của order
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrderRequest'
+      responses:
+        '200':
+          description: Order được cập nhật thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+    delete:
+      tags:
+        - Orders
+      summary: Xóa order
+      description: Xóa order theo ID
+      parameters:
+        - name: id
+          in: path
+          description: ID của order
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Order được xóa thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/orders/user/{userId}:
+    get:
+      tags:
+        - Orders
+      summary: Lấy orders theo user ID
+      description: Lấy tất cả orders của một user
+      parameters:
+        - name: userId
+          in: path
+          description: ID của user
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Danh sách orders của user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderListResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/v1/orders/product/{productId}:
+    get:
+      tags:
+        - Orders
+      summary: Lấy orders theo product ID
+      description: Lấy tất cả orders của một product
+      parameters:
+        - name: productId
+          in: path
+          description: ID của product
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Danh sách orders của product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderListResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  schemas:
+    # Common schemas
+    Pagination:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: Số trang hiện tại
+          example: 1
+        limit:
+          type: integer
+          description: Số items trên mỗi trang
+          example: 10
+        total:
+          type: integer
+          description: Tổng số items
+          example: 100
+        totalPages:
+          type: integer
+          description: Tổng số trang
+          example: 10
+
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Operation completed successfully"
+        timestamp:
+          type: string
+          format: date-time
+          example: "2024-10-03T10:30:00Z"
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: "Error message"
+        error:
+          type: string
+          example: "Detailed error description"
+        timestamp:
+          type: string
+          format: date-time
+          example: "2024-10-03T10:30:00Z"
+        path:
+          type: string
+          example: "/api/v1/users/123"
+
+    HealthResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "OK"
+        data:
+          type: object
+          properties:
+            status:
+              type: string
+              example: "OK"
+            version:
+              type: string
+              example: "1.0.0"
+        timestamp:
+          type: string
+          format: date-time
+
+    # User schemas
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID duy nhất của user
+          example: 1
+        name:
+          type: string
+          description: Tên của user
+          example: "Nguyễn Văn An"
+        created_at:
+          type: string
+          format: date-time
+          description: Thời gian tạo
+          example: "2024-01-01T00:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          description: Thời gian cập nhật cuối
+          example: "2024-01-01T00:00:00Z"
+
+    CreateUserRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Tên của user
+          example: "Nguyễn Văn An"
+          minLength: 1
+          maxLength: 100
+
+    UpdateUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Tên của user
+          example: "Nguyễn Văn Bình"
+          minLength: 1
+          maxLength: 100
+
+    UserResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "User retrieved successfully"
+        data:
+          $ref: '#/components/schemas/User'
+        timestamp:
+          type: string
+          format: date-time
+
+    UserListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Users retrieved successfully"
+        data:
+          type: object
+          properties:
+            users:
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
+            pagination:
+              $ref: '#/components/schemas/Pagination'
+        timestamp:
+          type: string
+          format: date-time
+
+    # Product schemas
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID duy nhất của product
+          example: 1
+        name:
+          type: string
+          description: Tên sản phẩm
+          example: "Gạo ST25"
+        unit:
+          type: string
+          description: Đơn vị tính
+          example: "kg"
+        origin:
+          type: string
+          description: Xuất xứ
+          example: "Việt Nam"
+        note:
+          type: string
+          nullable: true
+          description: Ghi chú
+          example: "Gạo thơm cao cấp"
+        is_active:
+          type: boolean
+          description: Trạng thái hoạt động
+          example: true
+        created_at:
+          type: string
+          format: date-time
+          description: Thời gian tạo
+          example: "2024-01-01T00:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          description: Thời gian cập nhật cuối
+          example: "2024-01-01T00:00:00Z"
+
+    CreateProductRequest:
+      type: object
+      required:
+        - name
+        - unit
+        - origin
+      properties:
+        name:
+          type: string
+          description: Tên sản phẩm
+          example: "Gạo ST25"
+          minLength: 1
+          maxLength: 100
+        unit:
+          type: string
+          description: Đơn vị tính
+          example: "kg"
+          minLength: 1
+          maxLength: 20
+        origin:
+          type: string
+          description: Xuất xứ
+          example: "Việt Nam"
+          minLength: 1
+          maxLength: 100
+        note:
+          type: string
+          description: Ghi chú
+          example: "Gạo thơm cao cấp"
+          maxLength: 500
+        is_active:
+          type: boolean
+          description: Trạng thái hoạt động
+          example: true
+          default: true
+
+    UpdateProductRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Tên sản phẩm
+          example: "Gạo ST25 Premium"
+          minLength: 1
+          maxLength: 100
+        unit:
+          type: string
+          description: Đơn vị tính
+          example: "kg"
+          minLength: 1
+          maxLength: 20
+        origin:
+          type: string
+          description: Xuất xứ
+          example: "Việt Nam"
+          minLength: 1
+          maxLength: 100
+        note:
+          type: string
+          description: Ghi chú
+          example: "Gạo thơm cao cấp đặc biệt"
+          maxLength: 500
+        is_active:
+          type: boolean
+          description: Trạng thái hoạt động
+          example: false
+
+    ProductResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Product retrieved successfully"
+        data:
+          $ref: '#/components/schemas/Product'
+        timestamp:
+          type: string
+          format: date-time
+
+    ProductListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Products retrieved successfully"
+        data:
+          type: object
+          properties:
+            products:
+              type: array
+              items:
+                $ref: '#/components/schemas/Product'
+            pagination:
+              $ref: '#/components/schemas/Pagination'
+        timestamp:
+          type: string
+          format: date-time
+
+    # Order schemas
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID duy nhất của order
+          example: 1
+        user_id:
+          type: integer
+          description: ID của user đặt hàng
+          example: 1
+        product_id:
+          type: integer
+          description: ID của product được đặt
+          example: 1
+        quantity:
+          type: integer
+          description: Số lượng đặt hàng
+          example: 10
+          minimum: 1
+        purpose:
+          type: string
+          nullable: true
+          description: Mục đích sử dụng
+          example: "Để bán lẻ"
+        created_at:
+          type: string
+          format: date-time
+          description: Thời gian tạo
+          example: "2024-01-01T00:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          description: Thời gian cập nhật cuối
+          example: "2024-01-01T00:00:00Z"
+        user:
+          type: object
+          description: Thông tin user (khi include)
+          properties:
+            id:
+              type: integer
+              example: 1
+            name:
+              type: string
+              example: "Nguyễn Văn An"
+        product:
+          type: object
+          description: Thông tin product (khi include)
+          properties:
+            id:
+              type: integer
+              example: 1
+            name:
+              type: string
+              example: "Gạo ST25"
+            unit:
+              type: string
+              example: "kg"
+            origin:
+              type: string
+              example: "Việt Nam"
+            note:
+              type: string
+              nullable: true
+              example: "Gạo thơm cao cấp"
+
+    CreateOrderRequest:
+      type: object
+      required:
+        - user_id
+        - product_id
+        - quantity
+      properties:
+        user_id:
+          type: integer
+          description: ID của user đặt hàng
+          example: 1
+          minimum: 1
+        product_id:
+          type: integer
+          description: ID của product được đặt
+          example: 1
+          minimum: 1
+        quantity:
+          type: integer
+          description: Số lượng đặt hàng
+          example: 10
+          minimum: 1
+        purpose:
+          type: string
+          description: Mục đích sử dụng
+          example: "Để bán lẻ"
+          maxLength: 200
+
+    UpdateOrderRequest:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          description: ID của user đặt hàng
+          example: 2
+          minimum: 1
+        product_id:
+          type: integer
+          description: ID của product được đặt
+          example: 2
+          minimum: 1
+        quantity:
+          type: integer
+          description: Số lượng đặt hàng
+          example: 15
+          minimum: 1
+        purpose:
+          type: string
+          description: Mục đích sử dụng
+          example: "Để bán buôn"
+          maxLength: 200
+
+    OrderResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Order retrieved successfully"
+        data:
+          $ref: '#/components/schemas/Order'
+        timestamp:
+          type: string
+          format: date-time
+
+    OrderListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Orders retrieved successfully"
+        data:
+          type: object
+          properties:
+            orders:
+              type: array
+              items:
+                $ref: '#/components/schemas/Order'
+            pagination:
+              $ref: '#/components/schemas/Pagination'
+        timestamp:
+          type: string
+          format: date-time
+
+  responses:
+    BadRequest:
+      description: Yêu cầu không hợp lệ
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: "Bad Request"
+            error: "Validation failed"
+            timestamp: "2024-10-03T10:30:00Z"
+
+    NotFound:
+      description: Không tìm thấy tài nguyên
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: "Not Found"
+            error: "Resource not found"
+            timestamp: "2024-10-03T10:30:00Z"
+
+    InternalServerError:
+      description: Lỗi server nội bộ
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            success: false
+            message: "Internal Server Error"
+            error: "An unexpected error occurred"
+            timestamp: "2024-10-03T10:30:00Z"
+
+tags:
+  - name: Health Check
+    description: Kiểm tra tình trạng hoạt động của API
+  - name: Users
+    description: Quản lý users trong hệ thống
+  - name: Products
+    description: Quản lý products trong hệ thống
+  - name: Orders
+    description: Quản lý orders trong hệ thống

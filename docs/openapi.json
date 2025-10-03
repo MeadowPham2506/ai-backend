@@ -1,0 +1,423 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "AI Backend API",
+    "version": "1.0.0",
+    "description": "REST API cho hệ thống quản lý Users, Products và Orders",
+    "contact": {
+      "name": "ThanhPH",
+      "email": "hoangthanh2k3@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Development server"
+    },
+    {
+      "url": "https://api.example.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["Health Check"],
+        "summary": "Health check endpoint",
+        "description": "Kiểm tra trạng thái hoạt động của API",
+        "responses": {
+          "200": {
+            "description": "API hoạt động bình thường",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Lấy danh sách users",
+        "description": "Lấy danh sách tất cả users với phân trang và tìm kiếm",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Số trang (mặc định 1)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Số items trên mỗi trang (mặc định 10)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Tìm kiếm theo tên user",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Sắp xếp theo trường",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["name", "created_at", "updated_at"],
+              "default": "created_at"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Thứ tự sắp xếp",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["asc", "desc"],
+              "default": "desc"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Danh sách users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Users"],
+        "summary": "Tạo user mới",
+        "description": "Tạo một user mới trong hệ thống",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User được tạo thành công",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "Số trang hiện tại",
+            "example": 1
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Số items trên mỗi trang",
+            "example": 10
+          },
+          "total": {
+            "type": "integer",
+            "description": "Tổng số items",
+            "example": 100
+          },
+          "totalPages": {
+            "type": "integer",
+            "description": "Tổng số trang",
+            "example": 10
+          }
+        }
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Operation completed successfully"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-10-03T10:30:00Z"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "message": {
+            "type": "string",
+            "example": "Error message"
+          },
+          "error": {
+            "type": "string",
+            "example": "Detailed error description"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2024-10-03T10:30:00Z"
+          },
+          "path": {
+            "type": "string",
+            "example": "/api/v1/users/123"
+          }
+        }
+      },
+      "HealthResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "OK"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "OK"
+              },
+              "version": {
+                "type": "string",
+                "example": "1.0.0"
+              }
+            }
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "ID duy nhất của user",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "Tên của user",
+            "example": "Nguyễn Văn An"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Thời gian tạo",
+            "example": "2024-01-01T00:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Thời gian cập nhật cuối",
+            "example": "2024-01-01T00:00:00Z"
+          }
+        }
+      },
+      "CreateUserRequest": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Tên của user",
+            "example": "Nguyễn Văn An",
+            "minLength": 1,
+            "maxLength": 100
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "User retrieved successfully"
+          },
+          "data": {
+            "$ref": "#/components/schemas/User"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "UserListResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Users retrieved successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "users": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "pagination": {
+                "$ref": "#/components/schemas/Pagination"
+              }
+            }
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Yêu cầu không hợp lệ",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "success": false,
+              "message": "Bad Request",
+              "error": "Validation failed",
+              "timestamp": "2024-10-03T10:30:00Z"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Không tìm thấy tài nguyên",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "success": false,
+              "message": "Not Found",
+              "error": "Resource not found",
+              "timestamp": "2024-10-03T10:30:00Z"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Lỗi server nội bộ",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "success": false,
+              "message": "Internal Server Error",
+              "error": "An unexpected error occurred",
+              "timestamp": "2024-10-03T10:30:00Z"
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Health Check",
+      "description": "Kiểm tra tình trạng hoạt động của API"
+    },
+    {
+      "name": "Users",
+      "description": "Quản lý users trong hệ thống"
+    },
+    {
+      "name": "Products",
+      "description": "Quản lý products trong hệ thống"
+    },
+    {
+      "name": "Orders",
+      "description": "Quản lý orders trong hệ thống"
+    }
+  ]
+}
