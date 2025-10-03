@@ -1,0 +1,9 @@
+.vscode
+dist
+.DS_Store
+node_modules
+tsconfig.tsbuildinfo
+.env
+.data
+logs
+generated
