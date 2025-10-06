@@ -20,475 +20,703 @@
 
 
 
-### ✨ Tính năng chính### ✨ Tính năng chính
+### ✨ Tính năng chính
 
+### ✨ Tính năng chính
 
+- 🔐 **Authentication & Authorization** với JWT
 
-- 🔐 **Authentication & Authorization** với JWT- 🔐 **Authentication & Authorization** với JWT
+- 📊 **RESTful API** với cấu trúc rõ ràng- 🔐 **Authentication & Authorization** với JWT
 
-- 📊 **RESTful API** với cấu trúc rõ ràng- 📊 **RESTful API** với cấu trúc rõ ràng
+- 🛡️ **Security** tích hợp (Helmet, CORS, Rate Limiting)- 📊 **RESTful API** với cấu trúc rõ ràng
 
-- 🛡️ **Security** tích hợp (Helmet, CORS, Rate Limiting)- 🛡️ **Security** tích hợp (Helmet, CORS, Rate Limiting)
+- 📝 **Database Management** với Prisma ORM- 🛡️ **Security** tích hợp (Helmet, CORS, Rate Limiting)
 
-- 📝 **Database Management** với Prisma ORM- 📝 **Database Management** với Prisma ORM
+- 🐳 **Docker** support cho PostgreSQL- 📝 **Database Management** với Prisma ORM
 
-- 🐳 **Docker** support cho PostgreSQL- � **Docker** support cho PostgreSQL
+- 🚦 **Process Management** với PM2- 🐳 **Docker** support cho PostgreSQL
 
-- 🚦 **Process Management** với PM2- 🚦 **Process Management** với PM2
+- 📈 **Logging** và monitoring- 🚦 **Process Management** với PM2
 
-- 📈 **Logging** và monitoring- 📈 **Logging** và monitoring
+- 🔄 **Hot reload** trong development- 📈 **Logging** và monitoring
 
-- 🔄 **Hot reload** trong development- 🔄 **Hot reload** trong development
+- 🔄 **Hot reload** trong development
 
+## 🛠️ Công nghệ sử dụng
 
+## 🛠️ Công nghệ sử dụng
 
-## 🛠️ Công nghệ sử dụng## 🛠️ Công nghệ sử dụng
+### Backend Framework & Runtime
 
+- ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=flat&logo=node.js&logoColor=white) **Node.js**: Runtime environment cho JavaScript### Backend Framework & Runtime
 
+- ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white) **TypeScript**: Superset của JavaScript với type safety- ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=flat&logo=node.js&logoColor=white) **Node.js**: Runtime environment cho JavaScript
 
-### Backend Framework & Runtime### Backend Framework & Runtime
+- ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=flat&logo=express&logoColor=white) **Express.js**: Web framework cho Node.js- ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white) **TypeScript**: Superset của JavaScript với type safety
 
-- **Node.js**: Runtime environment cho JavaScript- ![Node.js](https://img.shields.io/badge/Node.js-43853D?style=flat&logo=node.js&logoColor=white) **Node.js**: Runtime environment cho JavaScript
+- **ts-node**: TypeScript execution engine cho Node.js- ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=flat&logo=express&logoColor=white) **Express.js**: Web framework cho Node.js
 
-- **TypeScript**: Superset của JavaScript với type safety- ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white) **TypeScript**: Superset của JavaScript với type safety
+- **ts-node**: TypeScript execution engine cho Node.js
 
-- **Express.js**: Web framework cho Node.js- ![Express.js](https://img.shields.io/badge/Express.js-404D59?style=flat&logo=express&logoColor=white) **Express.js**: Web framework cho Node.js
+### Cơ sở dữ liệu & ORM
 
-- **ts-node**: TypeScript execution engine cho Node.js- **ts-node**: TypeScript execution engine cho Node.js
+- ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white) **PostgreSQL**: Hệ quản trị cơ sở dữ liệu quan hệ### Cơ sở dữ liệu & ORM
 
+- **Prisma**: Modern ORM cho TypeScript và Node.js- ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white) **PostgreSQL**: Hệ quản trị cơ sở dữ liệu quan hệ
 
+- ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) **Docker**: Container hóa PostgreSQL database- **Prisma**: Modern ORM cho TypeScript và Node.js
 
-### Cơ sở dữ liệu & ORM### Cơ sở dữ liệu & ORM
+- ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) **Docker**: Container hóa PostgreSQL database
 
-- **PostgreSQL**: Hệ quản trị cơ sở dữ liệu quan hệ- ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white) **PostgreSQL**: Hệ quản trị cơ sở dữ liệu quan hệ
+### Security & Middleware
 
-- **Prisma**: Modern ORM cho TypeScript và Node.js- **Prisma**: Modern ORM cho TypeScript và Node.js
+- **Helmet**: Bảo mật HTTP headers### Security & Middleware
 
-- **Docker**: Container hóa PostgreSQL database- ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white) **Docker**: Container hóa PostgreSQL database
+- **CORS**: Cross-Origin Resource Sharing- **Helmet**: Bảo mật HTTP headers
 
+- **Express Rate Limit**: Rate limiting middleware- **CORS**: Cross-Origin Resource Sharing
 
+- **Morgan**: HTTP request logger- **Express Rate Limit**: Rate limiting middleware
 
-### Security & Middleware### Security & Middleware
+- **Compression**: Gzip compression middleware- **Morgan**: HTTP request logger
 
-- **Helmet**: Bảo mật HTTP headers- **Helmet**: Bảo mật HTTP headers
+- **JSON Web Token**: Authentication tokens- **Compression**: Gzip compression middleware
 
-- **CORS**: Cross-Origin Resource Sharing- **CORS**: Cross-Origin Resource Sharing
+- **JSON Web Token**: Authentication tokens
 
-- **Express Rate Limit**: Rate limiting middleware- **Express Rate Limit**: Rate limiting middleware
+### Development Tools
 
-- **Morgan**: HTTP request logger- **Morgan**: HTTP request logger
+- **ESLint**: Code linting và style checking### Development Tools
 
-- **Compression**: Gzip compression middleware- **Compression**: Gzip compression middleware
+- **Prettier**: Code formatting- **ESLint**: Code linting và style checking
 
-- **JSON Web Token**: Authentication tokens- **JSON Web Token**: Authentication tokens
+- **Nodemon**: Auto-restart trong development- **Prettier**: Code formatting
 
+- **PM2**: Process manager cho production- **Nodemon**: Auto-restart trong development
 
+- **PM2**: Process manager cho production
 
-### Development Tools### Development Tools
+### Utilities
 
-- **ESLint**: Code linting và style checking- **ESLint**: Code linting và style checking
+- **Lodash**: JavaScript utility library### Utilities
 
-- **Prettier**: Code formatting- **Prettier**: Code formatting
+- **Axios**: HTTP client- **Lodash**: JavaScript utility library
 
-- **Nodemon**: Auto-restart trong development- **Nodemon**: Auto-restart trong development
+- **dotenv**: Environment variables management- **Axios**: HTTP client
 
-- **PM2**: Process manager cho production- **PM2**: Process manager cho production
+- **Signale**: Elegant console logger- **dotenv**: Environment variables management
 
+- **Signale**: Elegant console logger
 
+## 📁 Cấu trúc dự án
 
-### Utilities### Utilities
+## 📁 Cấu trúc dự án
 
-- **Lodash**: JavaScript utility library- **Lodash**: JavaScript utility library
+```
 
-- **Axios**: HTTP client- **Axios**: HTTP client
+ai-backend/```
 
-- **dotenv**: Environment variables management- **dotenv**: Environment variables management
+├── app/                              # Thư mục chính của ứng dụngai-backend/
 
-- **Signale**: Elegant console logger- **Signale**: Elegant console logger
+│   ├── src/                          # Source code├── app/                              # Thư mục chính của ứng dụng
 
+│   │   ├── main.ts                   # Entry point của ứng dụng│   ├── src/                          # Source code
 
+│   │   ├── app.ts                    # Express app configuration│   │   ├── main.ts                   # Entry point của ứng dụng
 
-## 📁 Cấu trúc dự án## 📁 Cấu trúc dự án
+│   │   ├── configs/                  # Cấu hình ứng dụng│   │   ├── app.ts                    # Express app configuration
 
-
-
-``````
-
-ai-backend/ai-backend/
-
-├── app/                              # Thư mục chính của ứng dụng├── app/                              # Thư mục chính của ứng dụng
-
-│   ├── src/                          # Source code│   ├── src/                          # Source code
-
-│   │   ├── main.ts                   # Entry point của ứng dụng│   │   ├── main.ts                   # Entry point của ứng dụng
-
-│   │   ├── app.ts                    # Express app configuration│   │   ├── app.ts                    # Express app configuration
-
-│   │   ├── configs/                  # Cấu hình ứng dụng│   │   ├── configs/                  # Cấu hình ứng dụng
+│   │   │   └── server.config.ts      # Cấu hình server│   │   ├── configs/                  # Cấu hình ứng dụng
 
 │   │   ├── constants/                # Hằng số và constants│   │   │   └── server.config.ts      # Cấu hình server
 
-│   │   ├── controllers/              # Controller layer (MVC)│   │   ├── constants/                # Hằng số và constants
+│   │   │   └── response.constant.ts  # Response constants│   │   ├── constants/                # Hằng số và constants
 
-│   │   ├── core/                     # Core utilities│   │   │   └── response.constant.ts  # Response constants
+│   │   ├── controllers/              # Controller layer (MVC)│   │   │   └── response.constant.ts  # Response constants
 
-│   │   ├── middlewares/              # Express middlewares│   │   ├── controllers/              # Controller layer (MVC)
+│   │   │   ├── order.controller.ts   # Order business logic│   │   ├── controllers/              # Controller layer (MVC)
 
-│   │   ├── repositories/             # Data access layer│   │   │   ├── order.controller.ts   # Order business logic
+│   │   │   ├── product.controller.ts # Product business logic│   │   │   ├── order.controller.ts   # Order business logic
 
-│   │   ├── routes/                   # API routes│   │   │   ├── product.controller.ts # Product business logic
+│   │   │   └── user.controller.ts    # User business logic│   │   │   ├── product.controller.ts # Product business logic
 
-│   │   │   ├── v1/                   # API version 1│   │   │   └── user.controller.ts    # User business logic
+│   │   ├── core/                     # Core utilities│   │   │   └── user.controller.ts    # User business logic
 
-│   │   │   └── v2/                   # API version 2│   │   ├── core/                     # Core utilities
+│   │   │   ├── database.core.ts      # Database connection│   │   ├── core/                     # Core utilities
 
-│   │   ├── services/                 # Business logic layer│   │   │   ├── database.core.ts      # Database connection
+│   │   │   ├── logger.core.ts        # Logging utility│   │   │   ├── database.core.ts      # Database connection
 
-│   │   ├── types/                    # TypeScript type definitions│   │   │   ├── logger.core.ts        # Logging utility
+│   │   │   └── response.core.ts      # Response helper│   │   │   ├── logger.core.ts        # Logging utility
 
-│   │   ├── utils/                    # Utility functions│   │   │   └── response.core.ts      # Response helper
+│   │   ├── middlewares/              # Express middlewares│   │   │   └── response.core.ts      # Response helper
 
-│   │   ├── sample/                   # Sample data và seeding│   │   ├── middlewares/              # Express middlewares
+│   │   │   ├── auth.middleware.ts    # Authentication middleware│   │   ├── middlewares/              # Express middlewares
 
-│   │   ├── public/                   # Static assets│   │   │   ├── auth.middleware.ts    # Authentication middleware
+│   │   │   ├── error.middleware.ts   # Error handling│   │   │   ├── auth.middleware.ts    # Authentication middleware
 
-│   │   └── logs/                     # Application logs│   │   │   ├── error.middleware.ts   # Error handling
+│   │   │   └── limiter.middleware.ts # Rate limiting│   │   │   ├── error.middleware.ts   # Error handling
 
-│   ├── prisma/                       # Prisma ORM configuration│   │   │   └── limiter.middleware.ts # Rate limiting
+│   │   ├── repositories/             # Data access layer│   │   │   └── limiter.middleware.ts # Rate limiting
 
-│   │   ├── schema.prisma             # Database schema│   │   ├── repositories/             # Data access layer
+│   │   │   ├── order.repository.ts   # Order data operations│   │   ├── repositories/             # Data access layer
 
-│   │   └── migrations/               # Database migrations│   │   │   ├── order.repository.ts   # Order data operations
+│   │   │   ├── product.repository.ts # Product data operations│   │   │   ├── order.repository.ts   # Order data operations
 
-│   ├── package.json                  # Dependencies và scripts│   │   │   ├── product.repository.ts # Product data operations
+│   │   │   └── user.repository.ts    # User data operations│   │   │   ├── product.repository.ts # Product data operations
 
-│   ├── tsconfig.json                 # TypeScript configuration│   │   │   └── user.repository.ts    # User data operations
+│   │   ├── routes/                   # API routes│   │   │   └── user.repository.ts    # User data operations
 
-│   ├── eslint.config.js              # ESLint configuration│   │   ├── routes/                   # API routes
+│   │   │   ├── index.ts              # Main router│   │   ├── routes/                   # API routes
 
-│   ├── nodemon.json                  # Nodemon configuration│   │   │   ├── index.ts              # Main router
+│   │   │   ├── v1/                   # API version 1│   │   │   ├── index.ts              # Main router
 
-│   └── ecosystem.config.js           # PM2 configuration│   │   │   ├── v1/                   # API version 1
+│   │   │   │   ├── index.ts          # V1 router│   │   │   ├── v1/                   # API version 1
 
-├── postgres/                         # PostgreSQL Docker setup│   │   │   │   ├── index.ts          # V1 router
+│   │   │   │   ├── order.route.ts    # Order endpoints│   │   │   │   ├── index.ts          # V1 router
 
-│   ├── docker-compose.yml            # Docker Compose config│   │   │   │   ├── order.route.ts    # Order endpoints
+│   │   │   │   ├── product.route.ts  # Product endpoints│   │   │   │   ├── order.route.ts    # Order endpoints
 
-│   └── postgresql.conf               # PostgreSQL configuration│   │   │   │   ├── product.route.ts  # Product endpoints
+│   │   │   │   └── user.route.ts     # User endpoints│   │   │   │   ├── product.route.ts  # Product endpoints
 
-└── docs/                            # API Documentation│   │   │   │   └── user.route.ts     # User endpoints
+│   │   │   └── v2/                   # API version 2│   │   │   │   └── user.route.ts     # User endpoints
 
-    ├── openapi.json                 # OpenAPI specification (JSON)│   │   │   └── v2/                   # API version 2
+│   │   │       └── index.ts          # V2 router│   │   │   └── v2/                   # API version 2
 
-    ├── openapi.yaml                 # OpenAPI specification (YAML)│   │   │       └── index.ts          # V2 router
+│   │   ├── services/                 # Business logic layer│   │   │       └── index.ts          # V2 router
 
-    └── postman.json                 # Postman collection│   │   ├── services/                 # Business logic layer
+│   │   │   ├── order.service.ts      # Order business logic│   │   ├── services/                 # Business logic layer
 
-```│   │   │   ├── order.service.ts      # Order business logic
+│   │   │   ├── product.service.ts    # Product business logic│   │   │   ├── order.service.ts      # Order business logic
 
-│   │   │   ├── product.service.ts    # Product business logic
+│   │   │   └── user.service.ts       # User business logic│   │   │   ├── product.service.ts    # Product business logic
 
-## 🗄️ Database Schema│   │   │   └── user.service.ts       # User business logic
+│   │   ├── types/                    # TypeScript type definitions│   │   │   └── user.service.ts       # User business logic
 
-│   │   ├── types/                    # TypeScript type definitions
+│   │   │   ├── common/               # Common types│   │   ├── types/                    # TypeScript type definitions
 
-Dự án sử dụng **PostgreSQL** với **3 bảng chính**:│   │   │   ├── common/               # Common types
+│   │   │   │   ├── config.types.ts   # Configuration types│   │   │   ├── common/               # Common types
 
-│   │   │   │   ├── config.types.ts   # Configuration types
+│   │   │   │   ├── document.types.ts # Document types│   │   │   │   ├── config.types.ts   # Configuration types
 
-### 👤 Users│   │   │   │   ├── document.types.ts # Document types
+│   │   │   │   └── response.types.ts # Response types│   │   │   │   ├── document.types.ts # Document types
 
-- `id`: Primary key (auto increment)│   │   │   │   └── response.types.ts # Response types
+│   │   │   └── dtos/                 # Data Transfer Objects│   │   │   │   └── response.types.ts # Response types
 
-- `name`: Tên người dùng│   │   │   └── dtos/                 # Data Transfer Objects
+│   │   │       ├── index.ts          # DTO exports│   │   │   └── dtos/                 # Data Transfer Objects
 
-- `created_at`, `updated_at`: Timestamps│   │   │       ├── index.ts          # DTO exports
+│   │   │       ├── order.dto.ts      # Order DTOs│   │   │       ├── index.ts          # DTO exports
 
-│   │   │       ├── order.dto.ts      # Order DTOs
+│   │   │       ├── product.dto.ts    # Product DTOs│   │   │       ├── order.dto.ts      # Order DTOs
 
-### 📦 Products│   │   │       ├── product.dto.ts    # Product DTOs
+│   │   │       └── user.dto.ts       # User DTOs│   │   │       ├── product.dto.ts    # Product DTOs
 
-- `id`: Primary key (auto increment)│   │   │       └── user.dto.ts       # User DTOs
+│   │   ├── utils/                    # Utility functions│   │   │       └── user.dto.ts       # User DTOs
 
-- `name`: Tên sản phẩm│   │   ├── utils/                    # Utility functions
+│   │   │   └── async-wrapper.util.ts # Async error wrapper│   │   ├── utils/                    # Utility functions
 
-- `unit`: Đơn vị tính│   │   │   └── async-wrapper.util.ts # Async error wrapper
+│   │   ├── sample/                   # Sample data│   │   │   └── async-wrapper.util.ts # Async error wrapper
 
-- `origin`: Xuất xứ│   │   ├── sample/                   # Sample data
+│   │   │   └── seed.ts               # Database seeding│   │   ├── sample/                   # Sample data
 
-- `note`: Ghi chú (optional)│   │   │   └── seed.ts               # Database seeding
+│   │   ├── public/                   # Static assets│   │   │   └── seed.ts               # Database seeding
 
-- `is_active`: Trạng thái hoạt động│   │   ├── public/                   # Static assets
+│   │   │   └── favicon.png           # Application favicon│   │   ├── public/                   # Static assets
 
-- `created_at`, `updated_at`: Timestamps│   │   │   └── favicon.png           # Application favicon
+│   │   └── logs/                     # Application logs│   │   │   └── favicon.png           # Application favicon
 
-│   │   └── logs/                     # Application logs
+│   │       └── app.log               # Main log file│   │   └── logs/                     # Application logs
 
-### 📋 Orders│   │       └── app.log               # Main log file
+│   ├── prisma/                       # Prisma ORM configuration│   │       └── app.log               # Main log file
 
-- `id`: Primary key (auto increment)│   ├── prisma/                       # Prisma ORM configuration
+│   │   ├── schema.prisma             # Database schema│   ├── prisma/                       # Prisma ORM configuration
 
-- `user_id`: Foreign key → Users│   │   ├── schema.prisma             # Database schema
+│   │   └── migrations/               # Database migrations│   │   ├── schema.prisma             # Database schema
 
-- `product_id`: Foreign key → Products│   │   └── migrations/               # Database migrations
+│   │       ├── migration_lock.toml   # Migration lock│   │   └── migrations/               # Database migrations
 
-- `quantity`: Số lượng│   │       ├── migration_lock.toml   # Migration lock
+│   │       └── 20251003075216_init/  # Initial migration│   │       ├── migration_lock.toml   # Migration lock
 
-- `purpose`: Mục đích sử dụng (optional)│   │       └── 20251003075216_init/  # Initial migration
+│   │           └── migration.sql     # SQL migration file│   │       └── 20251003075216_init/  # Initial migration
 
-- `created_at`, `updated_at`: Timestamps│   │           └── migration.sql     # SQL migration file
+│   ├── package.json                  # Dependencies và scripts│   │           └── migration.sql     # SQL migration file
 
-│   ├── package.json                  # Dependencies và scripts
+│   ├── tsconfig.json                 # TypeScript configuration│   ├── package.json                  # Dependencies và scripts
 
-## 🚀 Cài đặt và chạy dự án│   ├── tsconfig.json                 # TypeScript configuration
+│   ├── eslint.config.js              # ESLint configuration│   ├── tsconfig.json                 # TypeScript configuration
 
-│   ├── eslint.config.js              # ESLint configuration
+│   ├── nodemon.json                  # Nodemon configuration│   ├── eslint.config.js              # ESLint configuration
 
-### Yêu cầu hệ thống│   ├── nodemon.json                  # Nodemon configuration
+│   └── ecosystem.config.js           # PM2 configuration│   ├── nodemon.json                  # Nodemon configuration
 
-- **Node.js** >= 18.0.0│   └── ecosystem.config.js           # PM2 configuration
+├── postgres/                         # PostgreSQL Docker setup│   └── ecosystem.config.js           # PM2 configuration
 
-- **npm** hoặc **yarn**├── postgres/                         # PostgreSQL Docker setup
+│   ├── docker-compose.yml            # Docker Compose config├── postgres/                         # PostgreSQL Docker setup
 
-- **PostgreSQL** >= 16│   ├── docker-compose.yml            # Docker Compose config
+│   └── postgresql.conf               # PostgreSQL configuration│   ├── docker-compose.yml            # Docker Compose config
 
-- **Docker** & **Docker Compose** (optional)│   └── postgresql.conf               # PostgreSQL configuration
+└── docs/                            # API Documentation│   └── postgresql.conf               # PostgreSQL configuration
 
-└── docs/                            # API Documentation
+    ├── openapi.json                 # OpenAPI specification (JSON)└── docs/                            # API Documentation
 
-### 1. Clone repository    ├── openapi.json                 # OpenAPI specification (JSON)
+    ├── openapi.yaml                 # OpenAPI specification (YAML)    ├── openapi.json                 # OpenAPI specification (JSON)
 
-```bash    ├── openapi.yaml                 # OpenAPI specification (YAML)
+    └── postman.json                 # Postman collection    ├── openapi.yaml                 # OpenAPI specification (YAML)
 
-git clone https://github.com/MeadowPham2506/ai-backend.git    └── postman.json                 # Postman collection
-
-cd ai-backend```
+```    └── postman.json                 # Postman collection
 
 ```
 
 ## 🗄️ Database Schema
 
-### 2. Cài đặt dependencies
+```
 
-```bashDự án sử dụng **PostgreSQL** với **3 bảng chính**:
+Dự án sử dụng **PostgreSQL** với **3 bảng chính**:
 
-cd app
+## 🗄️ Database Schema
 
-npm install### 👤 Users
+### 👤 Users
 
-```- `id`: Primary key (auto increment)
+- `id`: Primary key (auto increment)### 2. Cài đặt dependencies
 
 - `name`: Tên người dùng
 
-### 3. Thiết lập cơ sở dữ liệu- `created_at`, `updated_at`: Timestamps
+- `created_at`, `updated_at`: Timestamps```bashDự án sử dụng **PostgreSQL** với **3 bảng chính**:
 
 
 
-#### Option A: Sử dụng Docker (Khuyến nghị)### 📦 Products
+### 📦 Productscd app
 
-```bash- `id`: Primary key (auto increment)
+- `id`: Primary key (auto increment)
 
-cd ../postgres- `name`: Tên sản phẩm
+- `name`: Tên sản phẩmnpm install### 👤 Users
 
-docker-compose up -d- `unit`: Đơn vị tính
+- `unit`: Đơn vị tính
 
-```- `origin`: Xuất xứ
+- `origin`: Xuất xứ```- `id`: Primary key (auto increment)
 
 - `note`: Ghi chú (optional)
 
+- `is_active`: Trạng thái hoạt động- `name`: Tên người dùng
+
+- `created_at`, `updated_at`: Timestamps
+
+### 3. Thiết lập cơ sở dữ liệu- `created_at`, `updated_at`: Timestamps
+
+### 📋 Orders
+
+- `id`: Primary key (auto increment)
+
+- `user_id`: Foreign key → Users
+
+- `product_id`: Foreign key → Products#### Option A: Sử dụng Docker (Khuyến nghị)### 📦 Products
+
+- `quantity`: Số lượng
+
+- `purpose`: Mục đích sử dụng (optional)```bash- `id`: Primary key (auto increment)
+
+- `created_at`, `updated_at`: Timestamps
+
+cd ../postgres- `name`: Tên sản phẩm
+
+## 🚀 Cài đặt và chạy dự án
+
+docker-compose up -d- `unit`: Đơn vị tính
+
+### Yêu cầu hệ thống
+
+- **Node.js** >= 18.0.0```- `origin`: Xuất xứ
+
+- **npm** hoặc **yarn**
+
+- **PostgreSQL** >= 16- `note`: Ghi chú (optional)
+
+- **Docker** & **Docker Compose** (optional)
+
 #### Option B: PostgreSQL local- `is_active`: Trạng thái hoạt động
 
-Tạo database local và cập nhật connection string trong `.env`- `created_at`, `updated_at`: Timestamps
+### 1. Clone repository
 
+```bashTạo database local và cập nhật connection string trong `.env`- `created_at`, `updated_at`: Timestamps
 
+git clone https://github.com/MeadowPham2506/ai-backend.git
+
+cd ai-backend
+
+```
 
 ### 4. Cấu hình môi trường### 📋 Orders
 
-Tạo file `.env` trong thư mục `app/`:- `id`: Primary key (auto increment)
+### 2. Cài đặt dependencies
 
-```env- `user_id`: Foreign key → Users
+```bashTạo file `.env` trong thư mục `app/`:- `id`: Primary key (auto increment)
 
-# Database- `product_id`: Foreign key → Products
+cd app
+
+npm install```env- `user_id`: Foreign key → Users
+
+# hoặc
+
+yarn install# Database- `product_id`: Foreign key → Products
+
+```
 
 PRISMA_DATABASE_URL="postgresql://postgres:postgres123@localhost:5432/production_db"- `quantity`: Số lượng
 
+### 3. Thiết lập cơ sở dữ liệu
+
 - `purpose`: Mục đích sử dụng (optional)
 
-# Server- `created_at`, `updated_at`: Timestamps
+#### Option A: Sử dụng Docker (Khuyến nghị)
 
-PORT=3000
+```bash# Server- `created_at`, `updated_at`: Timestamps
+
+cd ../postgres
+
+docker-compose up -dPORT=3000
+
+```
 
 NODE_ENV=development## 🚀 Cài đặt và chạy dự án
 
+#### Option B: PostgreSQL local
+
+Tạo database local và cập nhật connection string trong `.env`
 
 
-# JWT (nếu sử dụng authentication)### Yêu cầu hệ thống
 
-JWT_SECRET=your-secret-key- **Node.js** >= 18.0.0
+### 4. Cấu hình môi trường# JWT (nếu sử dụng authentication)### Yêu cầu hệ thống
 
-```- **npm** hoặc **yarn**
+Tạo file `.env` trong thư mục `app/`:
 
-- **PostgreSQL** >= 16
+```envJWT_SECRET=your-secret-key- **Node.js** >= 18.0.0
 
-### 5. Chạy migration- **Docker** & **Docker Compose** (optional)
+# Database
+
+PRISMA_DATABASE_URL="postgresql://postgres:postgres123@localhost:5432/production_db"```- **npm** hoặc **yarn**
+
+
+
+# Server- **PostgreSQL** >= 16
+
+PORT=3000
+
+NODE_ENV=development### 5. Chạy migration- **Docker** & **Docker Compose** (optional)
+
+
+
+# JWT (nếu sử dụng authentication)```bash
+
+JWT_SECRET=your-secret-key
+
+```cd app### 1. Clone repository
+
+
+
+### 5. Chạy migrationnpx prisma migrate dev```bash
 
 ```bash
 
-cd app### 1. Clone repository
+cd appnpx prisma generategit clone https://github.com/MeadowPham2506/ai-backend.git
 
-npx prisma migrate dev```bash
+npx prisma migrate dev
 
-npx prisma generategit clone https://github.com/MeadowPham2506/ai-backend.git
+npx prisma generate```cd ai-backend
 
-```cd ai-backend
+```
 
 ```
 
 ### 6. Seed dữ liệu mẫu (optional)
 
-```bash### 2. Cài đặt dependencies
+```bash### 6. Seed dữ liệu mẫu (optional)
 
-npm run seed```bash
+npm run seed
 
-```cd app
+``````bash### 2. Cài đặt dependencies
 
-npm install
 
-### 7. Khởi động server# hoặc
 
-yarn install
+### 7. Khởi động servernpm run seed```bash
 
-#### Development mode```
+
+
+#### Development mode```cd app
 
 ```bash
 
-npm run dev### 3. Thiết lập cơ sở dữ liệu
+npm run devnpm install
+
+```
+
+### 7. Khởi động server# hoặc
+
+#### Production mode
+
+```bashyarn install
+
+npm run build
+
+npm start#### Development mode```
+
+```
+
+```bash
+
+#### Sử dụng PM2
+
+```bashnpm run dev### 3. Thiết lập cơ sở dữ liệu
+
+npm install -g pm2
+
+pm2 start ecosystem.config.js```
 
 ```
 
 #### Option A: Sử dụng Docker (Khuyến nghị)
 
+Server sẽ chạy tại: `http://localhost:3000`
+
 #### Production mode```bash
+
+## 📚 API Documentation
 
 ```bashcd ../postgres
 
-npm run builddocker-compose up -d
+### Base URL
 
-npm start```
+```npm run builddocker-compose up -d
 
-```
+http://localhost:3000/api/v1
 
-#### Option B: PostgreSQL local
+```npm start```
 
-#### Sử dụng PM2Tạo database local và cập nhật connection string trong `.env`
 
-```bash
+
+### Endpoints chính```
+
+
+
+#### 👤 Users#### Option B: PostgreSQL local
+
+- `GET /api/v1/users` - Lấy danh sách users
+
+- `POST /api/v1/users` - Tạo user mới#### Sử dụng PM2Tạo database local và cập nhật connection string trong `.env`
+
+- `GET /api/v1/users/:id` - Lấy thông tin user
+
+- `PUT /api/v1/users/:id` - Cập nhật user```bash
+
+- `DELETE /api/v1/users/:id` - Xóa user
 
 npm install -g pm2### 4. Cấu hình môi trường
 
-pm2 start ecosystem.config.jsTạo file `.env` trong thư mục `app/`:
+#### 📦 Products
 
-``````env
-
-# Database
-
-Server sẽ chạy tại: `http://localhost:3000`PRISMA_DATABASE_URL="postgresql://postgres:postgres123@localhost:5432/production_db"
-
-
-
-## 📚 API Documentation# Server
-
-PORT=3000
-
-### Base URLNODE_ENV=development
-
-```
-
-http://localhost:3000/api/v1# JWT (nếu sử dụng authentication)
-
-```JWT_SECRET=your-secret-key
-
-```
-
-### Endpoints chính
-
-### 5. Chạy migration
-
-#### 👤 Users```bash
-
-- `GET /api/v1/users` - Lấy danh sách userscd app
-
-- `POST /api/v1/users` - Tạo user mớinpx prisma migrate dev
-
-- `GET /api/v1/users/:id` - Lấy thông tin user```
-
-- `PUT /api/v1/users/:id` - Cập nhật user
-
-- `DELETE /api/v1/users/:id` - Xóa user### 6. Seed dữ liệu mẫu (optional)
-
-```bash
-
-#### 📦 Productsnpm run seed
-
-- `GET /api/v1/products` - Lấy danh sách sản phẩm```
+- `GET /api/v1/products` - Lấy danh sách sản phẩmpm2 start ecosystem.config.jsTạo file `.env` trong thư mục `app/`:
 
 - `POST /api/v1/products` - Tạo sản phẩm mới
 
-- `GET /api/v1/products/:id` - Lấy thông tin sản phẩm### 7. Khởi động server
+- `GET /api/v1/products/:id` - Lấy thông tin sản phẩm``````env
 
 - `PUT /api/v1/products/:id` - Cập nhật sản phẩm
 
-- `DELETE /api/v1/products/:id` - Xóa sản phẩm#### Development mode
+- `DELETE /api/v1/products/:id` - Xóa sản phẩm# Database
 
-```bash
 
-#### 📋 Ordersnpm run dev
 
-- `GET /api/v1/orders` - Lấy danh sách đơn hàng```
+#### 📋 OrdersServer sẽ chạy tại: `http://localhost:3000`PRISMA_DATABASE_URL="postgresql://postgres:postgres123@localhost:5432/production_db"
+
+- `GET /api/v1/orders` - Lấy danh sách đơn hàng
 
 - `POST /api/v1/orders` - Tạo đơn hàng mới
 
-- `GET /api/v1/orders/:id` - Lấy thông tin đơn hàng#### Production mode
+- `GET /api/v1/orders/:id` - Lấy thông tin đơn hàng
 
-- `PUT /api/v1/orders/:id` - Cập nhật đơn hàng```bash
+- `PUT /api/v1/orders/:id` - Cập nhật đơn hàng## 📚 API Documentation# Server
 
-- `DELETE /api/v1/orders/:id` - Xóa đơn hàngnpm run build
+- `DELETE /api/v1/orders/:id` - Xóa đơn hàng
 
-npm start
+PORT=3000
 
-## 🧪 Scripts NPM```
+### 📄 Tài liệu API chi tiết
+
+- **OpenAPI Spec**: `/docs/openapi.yaml`### Base URLNODE_ENV=development
+
+- **Postman Collection**: `/docs/postman.json`
+
+```
+
+## 🧪 Scripts NPM
+
+http://localhost:3000/api/v1# JWT (nếu sử dụng authentication)
+
+```bash
+
+# Development```JWT_SECRET=your-secret-key
+
+npm run dev          # Chạy server với hot reload
+
+npm run build        # Build TypeScript to JavaScript```
+
+npm start            # Chạy production server
+
+### Endpoints chính
+
+# Code Quality
+
+npm run lint         # Chạy ESLint### 5. Chạy migration
+
+npm run format       # Format code với Prettier
+
+#### 👤 Users```bash
+
+# Database
+
+npm run seed         # Seed dữ liệu mẫu- `GET /api/v1/users` - Lấy danh sách userscd app
+
+npx prisma studio    # Mở Prisma Studio
+
+npx prisma generate  # Generate Prisma client- `POST /api/v1/users` - Tạo user mớinpx prisma migrate dev
+
+```
+
+- `GET /api/v1/users/:id` - Lấy thông tin user```
+
+## 🛡️ Security Features
+
+- `PUT /api/v1/users/:id` - Cập nhật user
+
+- **Helmet**: Security headers protection
+
+- **CORS**: Cross-origin resource sharing control- `DELETE /api/v1/users/:id` - Xóa user### 6. Seed dữ liệu mẫu (optional)
+
+- **Rate Limiting**: API rate limiting middleware
+
+- **Input Validation**: Request validation với DTOs```bash
+
+- **JWT Authentication**: Token-based authentication
+
+- **Error Handling**: Centralized error management#### 📦 Productsnpm run seed
 
 
 
-```bash#### Sử dụng PM2
+## 📊 Monitoring & Logging- `GET /api/v1/products` - Lấy danh sách sản phẩm```
 
-# Development```bash
+
+
+- **Morgan**: HTTP request logging- `POST /api/v1/products` - Tạo sản phẩm mới
+
+- **Signale**: Elegant console logging
+
+- **Log Files**: Automatic log rotation- `GET /api/v1/products/:id` - Lấy thông tin sản phẩm### 7. Khởi động server
+
+- **Health Checks**: Database connection monitoring
+
+- `PUT /api/v1/products/:id` - Cập nhật sản phẩm
+
+## 🐳 Docker Support
+
+- `DELETE /api/v1/products/:id` - Xóa sản phẩm#### Development mode
+
+### PostgreSQL Container
+
+```bash```bash
+
+cd postgres
+
+docker-compose up -d#### 📋 Ordersnpm run dev
+
+```
+
+- `GET /api/v1/orders` - Lấy danh sách đơn hàng```
+
+### Environment Variables
+
+- `POSTGRES_USER`: Database user- `POST /api/v1/orders` - Tạo đơn hàng mới
+
+- `POSTGRES_PASSWORD`: Database password
+
+- `POSTGRES_DB`: Database name- `GET /api/v1/orders/:id` - Lấy thông tin đơn hàng#### Production mode
+
+
+
+## 🔧 Cấu hình- `PUT /api/v1/orders/:id` - Cập nhật đơn hàng```bash
+
+
+
+### TypeScript- `DELETE /api/v1/orders/:id` - Xóa đơn hàngnpm run build
+
+- `tsconfig.json`: TypeScript configuration
+
+- Path aliases được thiết lập (`@src/*`)npm start
+
+
+
+### ESLint & Prettier## 🧪 Scripts NPM```
+
+- `eslint.config.js`: ESLint rules
+
+- Code formatting tự động với Prettier
+
+
+
+### PM2 (Production)```bash#### Sử dụng PM2
+
+- `ecosystem.config.js`: PM2 process configuration
+
+- Memory limit: 4GB# Development```bash
+
+- Auto restart: enabled
 
 npm run dev          # Chạy server với hot reloadnpm install -g pm2
 
+## 🤝 Contributing
+
 npm run build        # Build TypeScript to JavaScriptpm2 start ecosystem.config.js
 
-npm start            # Chạy production server```
+1. Fork repository
 
+2. Tạo feature branch (`git checkout -b feature/amazing-feature`)npm start            # Chạy production server```
 
+3. Commit changes (`git commit -m 'Add some amazing feature'`)
+
+4. Push to branch (`git push origin feature/amazing-feature`)
+
+5. Tạo Pull Request
 
 # Code QualityServer sẽ chạy tại: `http://localhost:3000`
 
+## 📝 License
+
 npm run lint         # Chạy ESLint
+
+Distributed under the MIT License. See `LICENSE` for more information.
 
 npm run format       # Format code với Prettier## 📚 API Documentation
 
+## 👨‍💻 Author
 
+
+
+**ThanhPH** - [MeadowPham2506](https://github.com/MeadowPham2506)
 
 # Database### Base URL
 
+## 📞 Liên hệ
+
 npm run seed         # Seed dữ liệu mẫu```
 
-npx prisma studio    # Mở Prisma Studiohttp://localhost:3000/api/v1
+- GitHub: [@MeadowPham2506](https://github.com/MeadowPham2506)
 
-npx prisma generate  # Generate Prisma client```
+- Email: thanhph2k3@example.comnpx prisma studio    # Mở Prisma Studiohttp://localhost:3000/api/v1
 
-```
+
+
+---npx prisma generate  # Generate Prisma client```
+
+
+
+⭐ Nếu dự án này hữu ích, hãy cho một star nhé!```
 
 ### Endpoints chính
 
