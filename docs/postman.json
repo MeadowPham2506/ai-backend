@@ -157,22 +157,22 @@
 			"description": "All product-related endpoints for CRUD operations"
 		},
 		{
-			"name": "Users",
+			"name": "Employees",
 			"item": [
 				{
-					"name": "Get All Users",
+					"name": "Get All Employees",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/users?page=1&limit=10&search=&sortBy=name&sortOrder=asc",
+							"raw": "{{base_url}}/api/v1/employees?page=1&limit=10&email=&code",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"users"
+								"employees"
 							],
 							"query": [
 								{
@@ -186,147 +186,80 @@
 									"description": "Items per page (default: 10)"
 								},
 								{
-									"key": "search",
+									"key": "email",
 									"value": "",
-									"description": "Search by user name"
+									"description": "Search by employee email"
 								},
 								{
-									"key": "sortBy",
-									"value": "name",
-									"description": "Sort by field (name, created_at, updated_at)"
-								},
-								{
-									"key": "sortOrder",
-									"value": "asc",
-									"description": "Sort order (asc, desc)"
+									"key": "code",
+									"value": null,
+									"description": "Search by employee code"
 								}
 							]
-						},
-						"description": "Get all users with pagination, filtering, and sorting options"
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get User by ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/api/v1/users/1",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"users",
-								"1"
-							]
-						},
-						"description": "Get a specific user by their ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Create User",
+					"name": "Search Employees By Name",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"John Doe\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/users",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"users"
-							]
-						},
-						"description": "Create a new user"
-					},
-					"response": []
-				},
-				{
-					"name": "Update User",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"Jane Doe\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/users/1",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"users",
-								"1"
-							]
-						},
-						"description": "Update an existing user by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete User",
-					"request": {
-						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Thang\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/users/1",
+							"raw": "{{base_url}}/api/v1/employees/search-by-name?page=1&limit=10",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"users",
-								"1"
+								"employees",
+								"search-by-name"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Page number (default: 1)"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Items per page (default: 10)"
+								}
 							]
-						},
-						"description": "Delete a user by ID"
+						}
 					},
 					"response": []
 				}
-			],
-			"description": "All user-related endpoints for CRUD operations"
+			]
 		},
 		{
-			"name": "Orders",
+			"name": "Meetings",
 			"item": [
 				{
-					"name": "Get All Orders",
+					"name": "Get Meeting Rooms",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/orders?page=1&limit=10&user_id=&product_id=&sortBy=created_at&sortOrder=desc&dateFrom=&dateTo=",
+							"raw": "{{base_url}}/api/v1/meetings?page=1&limit=10&is_active=&capacity_min=5",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"orders"
+								"meetings"
 							],
 							"query": [
 								{
@@ -340,188 +273,82 @@
 									"description": "Items per page (default: 10)"
 								},
 								{
-									"key": "user_id",
+									"key": "is_active",
 									"value": "",
-									"description": "Filter by user ID"
+									"description": "Filter by active status"
 								},
 								{
-									"key": "product_id",
-									"value": "",
-									"description": "Filter by product ID"
-								},
-								{
-									"key": "sortBy",
-									"value": "created_at",
-									"description": "Sort by field (quantity, created_at, updated_at)"
-								},
-								{
-									"key": "sortOrder",
-									"value": "desc",
-									"description": "Sort order (asc, desc)"
-								},
-								{
-									"key": "dateFrom",
-									"value": "",
-									"description": "Filter orders from date (YYYY-MM-DD)"
-								},
-								{
-									"key": "dateTo",
-									"value": "",
-									"description": "Filter orders to date (YYYY-MM-DD)"
+									"key": "capacity_min",
+									"value": "5",
+									"description": "Filter by meeting capacity"
 								}
 							]
-						},
-						"description": "Get all orders with pagination, filtering, and sorting options"
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get Order by ID",
+					"name": "Get Meeting Plan",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/orders/1",
+							"raw": "{{base_url}}/api/v1/meetings/plan?room_name=MOON&meeting_date=10/10/2025",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"orders",
-								"1"
-							]
-						},
-						"description": "Get a specific order by its ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Orders by User ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/api/v1/orders/user/1",
-							"host": [
-								"{{base_url}}"
+								"meetings",
+								"plan"
 							],
-							"path": [
-								"api",
-								"v1",
-								"orders",
-								"user",
-								"1"
+							"query": [
+								{
+									"key": "room_name",
+									"value": "MOON",
+									"description": "Filter by Room Name. Required"
+								},
+								{
+									"key": "meeting_date",
+									"value": "10/10/2025",
+									"description": "Filter by Date. Default is now"
+								}
 							]
-						},
-						"description": "Get all orders for a specific user"
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "Get Orders by Product ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/api/v1/orders/product/1",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"orders",
-								"product",
-								"1"
-							]
-						},
-						"description": "Get all orders for a specific product"
-					},
-					"response": []
-				},
-				{
-					"name": "Create Order",
+					"name": "Create Meeting",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"user_id\": 1,\n  \"product_id\": 1,\n  \"quantity\": 5,\n  \"purpose\": \"For testing purposes\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/orders",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"orders"
-							]
-						},
-						"description": "Create a new order"
-					},
-					"response": []
-				},
-				{
-					"name": "Update Order",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"user_id\": 2,\n  \"product_id\": 2,\n  \"quantity\": 10,\n  \"purpose\": \"Updated order purpose\"\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/api/v1/orders/1",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"orders",
-								"1"
-							]
-						},
-						"description": "Update an existing order by ID"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Order",
-					"request": {
-						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"employee_code\": \"thangth17031977\",\n    \"meeting_room_id\": \"1\",\n    \"meeting_date\": \"10/10/2025\", // DD/MM/YYYY\n    \"start_time\": \"10:30\", // HH:MM,\n    \"end_time\": \"13:00\", // HH:MM,\n    \"purpose\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{base_url}}/api/v1/orders/1",
+							"raw": "{{base_url}}/api/v1/meetings/plan",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"orders",
-								"1"
+								"meetings",
+								"plan"
 							]
-						},
-						"description": "Delete an order by ID"
+						}
 					},
 					"response": []
 				}
-			],
-			"description": "All order-related endpoints for CRUD operations"
+			]
 		},
 		{
 			"name": "Health Check",
@@ -547,6 +374,7 @@
 			"listen": "prerequest",
 			"script": {
 				"type": "text/javascript",
+				"requests": {},
 				"exec": [
 					""
 				]
@@ -556,6 +384,7 @@
 			"listen": "test",
 			"script": {
 				"type": "text/javascript",
+				"requests": {},
 				"exec": [
 					""
 				]
@@ -566,7 +395,6 @@
 		{
 			"key": "base_url",
 			"value": "http://localhost:8080",
-			"type": "string",
 			"description": "Base URL for the AI Backend API"
 		}
 	]
