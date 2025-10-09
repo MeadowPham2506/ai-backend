@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import ProductRoutes from '@src/routes/v1/product.route';
-import UserRoutes from '@src/routes/v1/user.route';
-import OrderRoutes from '@src/routes/v1/order.route';
+import EmployeeRoutes from '@src/routes/v1/employee.route';
+import MeetingRoutes from '@src/routes/v1/meeting.route';
 
 const router = Router();
 
 router.use('/products', ProductRoutes);
-router.use('/users', UserRoutes);
-router.use('/orders', OrderRoutes);
+router.use('/employees', EmployeeRoutes);
+router.use('/meetings', MeetingRoutes);
 
 export default router;

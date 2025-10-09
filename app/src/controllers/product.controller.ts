@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import ProductService from '../services/product.service';
 import { ApiResponseHandler, APIErrorResponse } from '@src/core/response.core';
 import asyncWrapper from '@src/utils/async-wrapper.util';
+import ProductService from '../services/product.service';
 import { 
     GetProductsQueryDto, 
     CreateProductDto, 
@@ -68,18 +68,4 @@ export default class ProductController {
         );
     });
 
-    static deleteProduct = asyncWrapper(async (req: Request, res: Response): Promise<Response<SuccessResponse<null> | ErrorResponse>> => {
-        const { id } = req.params;
-        const deleted = await ProductService.deleteProduct(parseInt(id));
-        
-        if (!deleted) {
-            throw new APIErrorResponse('Product not found', 404);
-        }
-
-        return ApiResponseHandler.sendSuccess(
-            res,
-            null,
-            'Product deleted successfully'
-        );
-    });
 }

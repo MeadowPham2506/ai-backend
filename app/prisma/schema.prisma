@@ -8,15 +8,58 @@ datasource db {
   url      = env("PRISMA_DATABASE_URL")
 }
 
-model User {
-  id         Int      @id @default(autoincrement())
-  name       String
-  created_at DateTime @default(now()) @map("created_at")
-  updated_at DateTime @updatedAt @map("updated_at")
+model Employee {
+  employee_code         String @id
 
-  orders Order[]
+  // Basic Information - Thông tin cơ bản
+  first_name            String // Tên
+  last_name             String // Họ và tên đệm
+  gender                String // Giới tính
+  date_of_birth         String // Ngày sinh
 
-  @@map("users")
+  // Contact Information - Thông tin liên hệ
+  email                 String @unique // Email
+  phone_number          String? // Số điện thoại
+  sos_phone_number      String? // Số điện thoại người liên hệ khi khẩn cấp
+
+  // Identity Information - Thông tin nhận dạng
+  identification_number String? // Số CCCD
+  identification_date   String? // Ngày cấp CCCD
+  identification_place  String? // Nơi cấp CCCD
+
+  // Address Information - Thông tin địa chỉ
+  place_of_origin       String? // Quê quán
+  registered_address    String? // Hộ khẩu thường chú
+  current_address       String? // Địa chỉ hiện tại
+
+  // Job Information - Thông tin công việc
+  workplace_address     String? // Địa chỉ nơi làm việc
+  job_title             String? // Chức danh công việc
+  job_department        String? // Phòng ban công tác
+
+  // Education Information - Thông tin học vấn
+  university_name       String? // Tên trường đại học
+  education_level       String? // Trình độ học vấn
+  field_of_study        String? // Ngành học
+  graduation_year       String?    // Năm tốt nghiệp
+  education_start_date  String? // Ngày bắt đầu học
+  education_end_date    String? // Ngày kết thúc học
+
+  // Employment Information - Thông tin tuyển dụng
+  join_date             String? // Ngày vào làm
+  contract_type         String? // Loại hợp đồng
+  contract_number       String? // Số hợp đồng
+  contract_start_date   String? // Ngày bắt đầu hợp đồng
+  contract_end_date     String? // Ngày kết thúc hợp đồng
+
+  created_at            DateTime @default(now())
+  updated_at            DateTime @default(now()) @updatedAt
+
+  // back-field for relation
+  orders     Order[]
+  meeting_plans MeetingPlan[]
+
+  @@map("employees")
 }
 
 model Product {
@@ -26,25 +69,88 @@ model Product {
   origin     String
   note       String?
   is_active  Boolean  @default(true)
-  created_at DateTime @default(now()) @map("created_at")
-  updated_at DateTime @updatedAt @map("updated_at")
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
 
-  orders Order[]
+  // back-field for relation
+  orders     Order[]
 
   @@map("products")
 }
 
 model Order {
-  id         Int      @id @default(autoincrement())
-  user_id    Int      @map("user_id")
-  product_id Int      @map("product_id")
-  quantity   Int
-  purpose    String?
-  created_at DateTime @default(now()) @map("created_at")
-  updated_at DateTime @updatedAt @map("updated_at")
+  id              Int      @id @default(autoincrement())
+  employee_code   String
+  product_id      Int
+  quantity        Int
+  purpose         String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now()) @updatedAt
 
-  user    User    @relation(fields: [user_id], references: [id])
-  product Product @relation(fields: [product_id], references: [id])
+  // Relations
+  product        Product  @relation(fields: [product_id], references: [id])
+  employee       Employee @relation(fields: [employee_code], references: [employee_code])
 
   @@map("orders")
+}
+
+model MeetingRoom {
+  id         Int      @id @default(autoincrement())
+  name       String
+  capacity   Int
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now()) @updatedAt
+
+  // back-field for relation
+  meeting_plans MeetingPlan[]
+  room_items    RoomItem[]
+
+  @@map("meeting_rooms")
+}
+
+model MeetingPlan {
+  id              Int      @id @default(autoincrement())
+  employee_code   String
+  room_id         Int
+  meeting_date    DateTime
+  start_time      DateTime
+  end_time        DateTime
+  purpose         String?
+  created_at      DateTime @default(now())
+  updated_at      DateTime @default(now()) @updatedAt
+
+  // Relations
+  meeting_room   MeetingRoom @relation(fields: [room_id], references: [id])
+  employee       Employee    @relation(fields: [employee_code], references: [employee_code])
+
+  @@map("meeting_plans")
+}
+
+model MeetingItem {
+  id          Int      @id @default(autoincrement())
+  name        String
+  note        String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+
+  // back-field for relation
+  room_items RoomItem[]
+
+  @@map("meeting_items")
+}
+
+model RoomItem {
+  id          Int      @id @default(autoincrement())
+  room_id     Int
+  item_id Int
+  quantity    Int
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
+
+  // Relations
+  meeting_room MeetingRoom @relation(fields: [room_id], references: [id])
+  meeting_item MeetingItem @relation(fields: [item_id], references: [id])
+
+  @@map("room_items")
 }

@@ -1,7 +1,6 @@
 // Re-export all DTOs
 export * from './product.dto';
-export * from './user.dto';
-export * from './order.dto';
+export * from './employee.dto';
 
 // Common DTOs
 export interface PaginationDto {

@@ -49,7 +49,7 @@ export default class ProductRepository {
         search?: string, 
         is_active?: boolean
     ) {
-        const offset = (page - 1) * limit;
+        const offset = limit === -1 ? 0 : (page - 1) * limit;
         
         const whereClause: any = {};
         
@@ -68,13 +68,12 @@ export default class ProductRepository {
         return prisma.product.findMany({
             where: whereClause,
             skip: offset,
-            take: limit,
+            take: limit === -1 ? undefined : limit,
             orderBy: { id: 'desc' }
         });
     }
 
     static async countProducts(search?: string, is_active?: boolean): Promise<number> {
-        console.log(search);
         const whereClause: any = {};
         
         if (search) {

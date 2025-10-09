@@ -1,5 +1,4 @@
 import ProductRepository from "@src/repositories/product.repository";
-import OrderRepository from "@src/repositories/order.repository";
 import { 
     GetProductsQueryDto, 
     CreateProductDto, 
@@ -169,25 +168,5 @@ export default class ProductService {
             note: product.note,
             is_active: product.is_active
         };
-    }
-
-    static async deleteProduct(id: number): Promise<boolean> {
-        if (isNaN(id) || id <= 0) {
-            throw new APIErrorResponse('Invalid product ID', 400);
-        }
-
-        // Check if product exists
-        const existingProduct = await ProductRepository.getProductById(id);
-        if (!existingProduct) {
-            return false;
-        }
-
-        // Check if product has orders
-        const orders = await OrderRepository.findByProductId(id);
-        if (orders && orders.length > 0) {
-            throw new APIErrorResponse('Cannot delete product with existing orders', 400);
-        }
-
-        return await ProductRepository.deleteProduct(id);
     }
 }
