@@ -165,7 +165,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/v1/employees?page=1&limit=10&email=&code",
+							"raw": "{{base_url}}/api/v1/employees?page=1&limit=10&email=thang&code=thang",
 							"host": [
 								"{{base_url}}"
 							],
@@ -187,12 +187,12 @@
 								},
 								{
 									"key": "email",
-									"value": "",
+									"value": "thang",
 									"description": "Search by employee email"
 								},
 								{
 									"key": "code",
-									"value": null,
+									"value": "thang",
 									"description": "Search by employee code"
 								}
 							]
@@ -343,6 +343,58 @@
 								"v1",
 								"meetings",
 								"plan"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Get Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/orders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_id\": 2,\n    \"employee_code\": \"thangth17031977\",\n    \"quantity\": 1,\n    \"purpose\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/orders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"orders"
 							]
 						}
 					},
