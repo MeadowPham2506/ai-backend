@@ -22,7 +22,7 @@ export default class ProductService {
             throw new APIErrorResponse('Page number must be greater than 0', 400);
         }
 
-        if (limit <= 0 || limit > 100) {
+        if ((limit <= 0 || limit > 100) && limit !== -1) {
             throw new APIErrorResponse('Limit must be between 1 and 100', 400);
         }
 
