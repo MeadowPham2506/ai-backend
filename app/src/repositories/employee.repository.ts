@@ -19,7 +19,7 @@ export default class EmployeeRepository {
         }
 
         if (code) {
-            whereClause.code = { contains: code, mode: 'insensitive' };
+            whereClause.employee_code = { contains: code, mode: 'insensitive' };
         }
 
         return prisma.employee.findMany({
@@ -59,7 +59,7 @@ export default class EmployeeRepository {
             whereClause.email = { contains: email, mode: 'insensitive' };
         }
         if (code) {
-            whereClause.code = { contains: code, mode: 'insensitive' };
+            whereClause.employee_code = { contains: code, mode: 'insensitive' };
         }
 
         return prisma.employee.count({
